@@ -18,10 +18,11 @@ class Circle extends VastObject {
         // x, y calculations
         const x = this.vast.__calcX(this.position.x);
         const y = this.vast.__calcY(this.position.y);
+        const radius = this.radius * this.vast.camera.zoom;
 
         // drawing a circle in ctx
         ctx.beginPath();
-        ctx.arc(x, y, this.radius, 0, Math.PI * 2);
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
     }
