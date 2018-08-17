@@ -1,11 +1,12 @@
 const Vast = require('../../lib/index')
 const vast = new Vast();
 
-vast.add(new Vast.Circle(10, 0, 0))
+const circle = new Vast.Circle(10, 0, 0);
+vast.add(circle)
 
 const render = () => {
     requestAnimationFrame(render);
-    vast.camera.x++;
+    circle.x++;
 }
 
 render();

@@ -9,8 +9,8 @@ class Circle {
     render (ctx, vastCenterX, vastCenterY) {
         ctx.fillStyle = '#000';
 
-        const x = vastCenterX - this.x;
-        const y = vastCenterY - this.y;
+        const x = this.x + vastCenterX;
+        const y = this.y + vastCenterY;
 
         ctx.beginPath();
         ctx.arc(x, y, this.radius, 0, Math.PI * 2);
