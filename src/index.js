@@ -42,7 +42,22 @@ class Vast {
     }
 
     __drawGrids () {
-
+        this.ctx.strokeStyle = '#EEE';
+        const size = 50;
+        for (let i = -this.camera.x % size; i < this.width; i += size) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(i, 0);
+            this.ctx.lineTo(i, this.height);
+            this.ctx.closePath();
+            this.ctx.stroke();
+        }
+        for (let i = -this.camera.y % size; i < this.height; i += size) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, i);
+            this.ctx.lineTo(this.width, i);
+            this.ctx.closePath();
+            this.ctx.stroke();
+        }
     }
 
     __createView () {
@@ -61,11 +76,11 @@ class Vast {
         // re-calling render function in the next frame
         requestAnimationFrame(() => this.__render());
 
-        // Drawing helper grids if it was supposed to be drawn
-        if (this.grids) this.__drawGrids();
-
         // re-clearing all the canvas
         this.ctx.clearRect(0, 0, this.width, this.height);
+
+        // Drawing helper grids if it was supposed to be drawn
+        if (this.grids) this.__drawGrids();
 
         // rendering all vast objects
         const vastCenterX = -this.camera.x + this.width/2;
