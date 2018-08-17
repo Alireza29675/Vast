@@ -12,12 +12,20 @@ class Vast {
 
     constructor () {
         this.__createView();
+        this.__trackMouse();
         this.__draggableScreen();
         this.__zoomableScreen();
         this.__render();
     }
 
     // Private Methods
+
+    __trackMouse () {
+        this.view.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+        })
+    }
 
     __draggableScreen () {
         this.view.addEventListener('mousedown', () => {
@@ -30,8 +38,6 @@ class Vast {
             }
         });
         this.view.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
             if (this.mouse.down) {
                 this.camera.x = this.mouse.onDragInfo.cameraX + (this.mouse.onDragInfo.x - this.mouse.x) / this.camera.zoom;
                 this.camera.y = this.mouse.onDragInfo.cameraY + (this.mouse.onDragInfo.y - this.mouse.y) / this.camera.zoom;
