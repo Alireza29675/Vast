@@ -7,7 +7,13 @@ vast.add(circle)
 
 const render = () => {
     requestAnimationFrame(render);
-    circle.x++;
+    writeInHelper();
+    circle.position.x++;
+}
+
+const helper = document.querySelector('.helper');
+const writeInHelper = () => {
+    helper.innerHTML = `camera: ${ JSON.stringify(vast.camera) }, circle: ${ JSON.stringify(circle.position) }`;
 }
 
 render();

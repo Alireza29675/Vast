@@ -6,8 +6,7 @@ class Circle extends VastObject {
         super();
         this.radius = radius;
         this.color = '#000'
-        this.x = x;
-        this.y = y;
+        this.position = { x, y };
     }
 
     draw () {
@@ -17,8 +16,8 @@ class Circle extends VastObject {
         ctx.fillStyle = this.color;
 
         // x, y calculations
-        const x = this.vast.__calcX(this.x);
-        const y = this.vast.__calcY(this.y);
+        const x = this.vast.__calcX(this.position.x);
+        const y = this.vast.__calcY(this.position.y);
 
         // drawing a circle in ctx
         ctx.beginPath();
