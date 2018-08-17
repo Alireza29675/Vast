@@ -44,14 +44,16 @@ class Vast {
     __drawGrids () {
         this.ctx.strokeStyle = '#EEE';
         const size = 50;
-        for (let i = -this.camera.x % size; i < this.width; i += size) {
+        const gridBiasX = this.width/2 % size;
+        const gridBiasY = this.height/2 % size;
+        for (let i = -this.camera.x % size + gridBiasX; i < this.width; i += size) {
             this.ctx.beginPath();
             this.ctx.moveTo(i, 0);
             this.ctx.lineTo(i, this.height);
             this.ctx.closePath();
             this.ctx.stroke();
         }
-        for (let i = -this.camera.y % size; i < this.height; i += size) {
+        for (let i = -this.camera.y % size + gridBiasY; i < this.height; i += size) {
             this.ctx.beginPath();
             this.ctx.moveTo(0, i);
             this.ctx.lineTo(this.width, i);
@@ -83,14 +85,22 @@ class Vast {
         if (this.grids) this.__drawGrids();
 
         // rendering all vast objects
-        const vastCenterX = -this.camera.x + this.width/2;
-        const vastCenterY = -this.camera.y + this.height/2;
-        for (let object of this.objects) object.render(this.ctx, vastCenterX, vastCenterY);
+        for (let object of this.objects) object.changes();
+        for (let object of this.objects) object.draw();
+    }
+
+    __calcX (x) {
+        return -this.camera.x + this.width/2 + x;
+    }
+
+    __calcY (y) {
+        return -this.camera.y + this.height/2 + y;
     }
 
     // Public Methods
 
     add (object) {
+        object.vast = this;
         this.objects.push(object)
     }
 
