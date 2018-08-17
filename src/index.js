@@ -13,6 +13,7 @@ class Vast {
     constructor () {
         this.__createView();
         this.__draggableScreen();
+        this.__zoomableScreen();
         this.__render();
     }
 
@@ -39,6 +40,14 @@ class Vast {
         this.view.addEventListener('mouseup', () => {
             this.mouse.down = false;
         });
+    }
+
+    __zoomableScreen () {
+        window.addEventListener('mousewheel', e => {
+            this.camera.zoom += e.deltaY / 500;
+            this.camera.zoom = Math.max(this.camera.zoom, 0.5);
+            this.camera.zoom = Math.min(this.camera.zoom, 5);
+        })
     }
 
     __drawGrids () {
