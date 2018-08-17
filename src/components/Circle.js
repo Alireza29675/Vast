@@ -5,15 +5,16 @@ class Circle extends VastObject {
     constructor (radius, x, y) {
         super();
         this.radius = radius;
+        this.color = '#000'
         this.x = x;
         this.y = y;
     }
 
     draw () {
-        const ctx = this.vast.ctx;
+        const ctx = this.ctx;
 
         // circle styles
-        ctx.fillStyle = '#000';
+        ctx.fillStyle = this.color;
 
         // x, y calculations
         const x = this.vast.__calcX(this.x);

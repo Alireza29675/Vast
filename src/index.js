@@ -100,7 +100,7 @@ class Vast {
     // Public Methods
 
     add (object) {
-        object.vast = this;
+        object.setVast(this);
         this.objects.push(object)
     }
 

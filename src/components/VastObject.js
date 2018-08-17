@@ -1,5 +1,8 @@
 class VastObject {
-    vast = null;
+    setVast (vast) {
+        this.vast = vast;
+        this.ctx = vast.ctx;
+    }
     changes () {};
     draw () {};
 }
