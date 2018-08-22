@@ -2,7 +2,7 @@ const VastObject = require('./VastObject');
 
 class Circle extends VastObject {
 
-    constructor (radius, x, y) {
+    constructor (radius, x = 0, y = 0) {
         super();
         this.radius = radius;
         this.color = '#000'
