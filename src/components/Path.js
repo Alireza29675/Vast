@@ -4,7 +4,7 @@ class Path extends VastObject {
 
     constructor (points, tickness = 2) {
         super();
-        this.points = points;
+        this.points = points || [];
         this.tickness = tickness;
         this.color = '#000';
     }

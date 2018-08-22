@@ -59,7 +59,7 @@ class Vast {
     __zoomableScreen () {
         window.addEventListener('mousewheel', e => {
             this.camera.zoom += e.deltaY / 500;
-            this.camera.zoom = Math.max(this.camera.zoom, 0.5);
+            this.camera.zoom = Math.max(this.camera.zoom, 0.2);
             this.camera.zoom = Math.min(this.camera.zoom, 5);
         })
     }
