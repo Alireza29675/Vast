@@ -4,8 +4,8 @@ const Path = require('./components/Path');
 
 class Vast {
 
-    camera = { x: 0, y: 0, zoom: 0.5 }
-    mouse = { x: 0, y: 0, down: false }
+    camera = { x: 0, y: 0, zoom: 1 }
+    mouse = { x: 0, y: 0, down: false, onDragInfo: {} }
     objects = [];
 
     grids = true;
@@ -34,15 +34,19 @@ class Vast {
     __draggableScreen () {
         this.view.addEventListener('mousedown', () => {
             this.mouse.down = true;
-            this.mouse.onDragInfo = {
-                x: this.mouse.x,
-                y: this.mouse.y,
-                cameraX: this.camera.x,
-                cameraY: this.camera.y
-            }
+            this.mouse.onDragInfo.x = this.mouse.x;
+            this.mouse.onDragInfo.y = this.mouse.y;
+            this.mouse.onDragInfo.cameraX = this.camera.x;
+            this.mouse.onDragInfo.cameraY = this.camera.y;
         });
         this.view.addEventListener('mousemove', (e) => {
-            if (this.mouse.down) {
+            if (this.mouse.down && !e.altKey) {
+                this.mouse.onDragInfo.x = this.mouse.x;
+                this.mouse.onDragInfo.y = this.mouse.y;
+                this.mouse.onDragInfo.cameraX = this.camera.x;
+                this.mouse.onDragInfo.cameraY = this.camera.y;
+            }
+            if (this.mouse.down && e.altKey) {
                 this.camera.x = this.mouse.onDragInfo.cameraX + (this.mouse.onDragInfo.x - this.mouse.x) / this.camera.zoom;
                 this.camera.y = this.mouse.onDragInfo.cameraY + (this.mouse.onDragInfo.y - this.mouse.y) / this.camera.zoom;
             }
@@ -114,6 +118,14 @@ class Vast {
 
     __calcY (y) {
         return ((y - this.camera.y) * this.camera.zoom) + this.height/2;
+    }
+
+    __deCalcX (x) {
+        return (x - this.width/2) / this.camera.zoom + this.camera.x;
+    }
+
+    __deCalcY (y) {
+        return (y - this.height/2) / this.camera.zoom + this.camera.y;
     }
 
     // Public Methods
