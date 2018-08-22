@@ -2,7 +2,9 @@ const Vast = require('../../lib/index')
 const vast = new Vast();
 
 const circle = new Vast.Circle(10, 0, 0);
+const rectangle = new Vast.Rectangle(100, 100);
 vast.add(circle)
+vast.add(rectangle)
 
 const render = () => {
     requestAnimationFrame(render);

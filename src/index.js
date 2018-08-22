@@ -1,4 +1,5 @@
 const Circle = require('./components/Circle');
+const Rectangle = require('./components/Rectangle');
 
 class Vast {
 
@@ -9,6 +10,7 @@ class Vast {
     grids = true;
 
     static Circle = Circle;
+    static Rectangle = Rectangle;
 
     constructor () {
         this.__createView();
