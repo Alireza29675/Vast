@@ -9,7 +9,7 @@ class Path extends VastObject {
         this.color = '#000';
     }
 
-    draw () {
+    __draw () {
         const ctx = this.ctx;
         const points = this.points;
 

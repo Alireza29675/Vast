@@ -9,7 +9,7 @@ class Circle extends VastObject {
         this.position = { x, y };
     }
 
-    draw () {
+    __draw () {
         const ctx = this.ctx;
 
         // circle styles

@@ -10,7 +10,7 @@ class Rectangle extends VastObject {
         this.position = { x, y };
     }
 
-    draw () {
+    __draw () {
         const ctx = this.ctx;
 
         // rectangle styles

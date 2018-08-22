@@ -104,8 +104,8 @@ class Vast {
         if (this.grids) this.__drawGrids();
 
         // rendering all vast objects
-        for (let object of this.objects) object.changes();
-        for (let object of this.objects) object.draw();
+        for (let object of this.objects) object.__changes();
+        for (let object of this.objects) object.__draw();
     }
 
     __calcX (x) {
@@ -119,7 +119,7 @@ class Vast {
     // Public Methods
 
     add (object) {
-        object.setVast(this);
+        object.__setVast(this);
         this.objects.push(object)
     }
 

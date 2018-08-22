@@ -1,10 +1,10 @@
 class VastObject {
-    setVast (vast) {
+    __setVast (vast) {
         this.vast = vast;
         this.ctx = vast.ctx;
     }
-    changes () {};
-    draw () {};
+    __changes () {};
+    __draw () {};
 }
 
 module.exports = VastObject;
