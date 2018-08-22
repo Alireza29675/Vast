@@ -1,23 +1,28 @@
 const Vast = require('../../lib/index')
 const vast = new Vast();
 
-const circle = new Vast.Circle(10, 0, 0);
+const circle = new Vast.Circle(10);
+const circle2 = new Vast.Circle(20);
 const rectangle = new Vast.Rectangle(100, 100);
-const path = new Vast.Path([{x: 0, y: 0}, {x: 4, y: 4}, {x: 6, y: 6}]);
+
+circle.color = 'rgba(200, 80, 80, 1)';
+circle2.color = 'rgba(70, 160, 230, 0.8)'
 
 vast.add(circle)
-// vast.add(rectangle)
-vast.add(path)
+vast.add(circle2)
+
+let time = 0;
 
 const render = () => {
     requestAnimationFrame(render);
-    writeInHelper();
-    circle.position.x++;
-    circle.position.y++;
-    // vast.camera.x++;
-    // vast.camera.y++;
+    time++;
+    circle.position.x = Math.cos(time/10) * 40;
+    circle.position.y = Math.sin(time/10) * 40;
+    circle2.position.x = Math.sin(time/20) * 100;
+    circle2.position.y = Math.cos(time/20) * 20;
 }
 
+// Drawing
 let drawingPath = null;
 window.addEventListener('mousedown', e => {
     drawingPath = new Vast.Path([{x: vast.__deCalcX(e.offsetX), y: vast.__deCalcY(e.offsetY)}]);
@@ -31,11 +36,6 @@ window.addEventListener('mousemove', e => {
 window.addEventListener('mouseup', () => {
     drawingPath = null;
 })
-
-const helper = document.querySelector('.helper');
-const writeInHelper = () => {
-    helper.innerHTML = `camera: ${ JSON.stringify(vast.camera) }, circle: ${ JSON.stringify(circle.position) }`;
-}
 
 render();
 
