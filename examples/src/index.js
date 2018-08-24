@@ -36,7 +36,7 @@ window.addEventListener('mousedown', e => {
 window.addEventListener('mousemove', e => {
     if (drawingPath && !e.altKey) {
         drawingPath.addPoint({x: vast.__deCalcX(e.offsetX), y: vast.__deCalcY(e.offsetY)})
-        console.log(drawingPath.export().length)
+        console.log(drawingPath.export())
     }
 })
 window.addEventListener('mouseup', () => {

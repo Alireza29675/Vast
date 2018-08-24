@@ -79,9 +79,13 @@ class Path extends VastObject {
     // public methods
 
     export () {
-        let encodedPath = 'P:';
-        encodedPath += this.points.map(point => `${point.x},${point.y}`).join('|')
-        return encodedPath;
+        let exported = '';
+        exported += `type=Path\n`;
+        exported += `color=${this.color}\n`;
+        exported += `tickness=${this.tickness}\n`;
+        exported += `smooth=${this.smooth}\n`;
+        exported += `points=${this.points.map(point => `${point.x},${point.y}`).join('|')}`;
+        return exported;
     }
 
     addPoint (point) {
