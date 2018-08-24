@@ -9,6 +9,8 @@ class Circle extends VastObject {
         this.position = { x, y };
     }
 
+    // private methods
+
     __draw () {
         const ctx = this.ctx;
 
@@ -25,6 +27,17 @@ class Circle extends VastObject {
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fill();
+    }
+
+    // public methods
+
+    export () {
+        let exported = '';
+        exported += `type=Circle\n`;
+        exported += `color=${this.color}\n`;
+        exported += `radius=${this.radius}\n`;
+        exported += `position=${this.position.x}|${this.position.y}`;
+        return exported;
     }
 
 }
