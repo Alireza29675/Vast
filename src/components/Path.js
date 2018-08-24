@@ -6,6 +6,7 @@ class Path extends VastObject {
         super();
         this.points = points || [];
         this.tickness = tickness;
+        this.smooth = true;
         this.color = '#000';
     }
 
@@ -15,18 +16,52 @@ class Path extends VastObject {
         this.points.push(point)
     }
 
-    __draw () {
+    __smoothDraw () {
         const ctx = this.ctx;
         const points = this.points;
 
         // path styles
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = this.tickness;
+        this.ctx.strokeStyle = this.color;
+        this.ctx.lineWidth = this.tickness;
+
+        if(points == undefined || points.length == 0)
+        {
+            return true;
+        }
+        if(points.length == 1)
+        {
+            ctx.moveTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
+            ctx.lineTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
+            return true;
+        }
+        if(points.length == 2)
+        {
+            ctx.moveTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
+            ctx.lineTo(this.vast.__calcX(points[1].x), this.vast.__calcY(points[1].y));
+            return true;
+        }
+        ctx.moveTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
+        for (var i = 1; i < points.length - 2; i ++)
+        {
+            var xc = (this.vast.__calcX(points[i].x) + this.vast.__calcX(points[i + 1].x)) / 2;
+            var yc = (this.vast.__calcY(points[i].y) + this.vast.__calcY(points[i + 1].y)) / 2;
+            ctx.quadraticCurveTo(this.vast.__calcX(points[i].x), this.vast.__calcY(points[i].y), xc, yc);
+        }
+        ctx.quadraticCurveTo(this.vast.__calcX(points[i].x), this.vast.__calcY(points[i].y), this.vast.__calcX(points[i+1].x), this.vast.__calcY(points[i+1].y));
+        ctx.stroke();
+    }
+
+    __hardDraw () {
+        const ctx = this.ctx;
+        const points = this.points;
+
+        // path styles
+        this.ctx.strokeStyle = this.color;
+        this.ctx.lineWidth = this.tickness;
 
         // drawing a path in ctx
 
         ctx.beginPath();
-
 
         ctx.moveTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
 
@@ -36,6 +71,12 @@ class Path extends VastObject {
         }
 
         ctx.stroke();
+    }
+
+    __draw () {
+
+        // choosing between hard or smooth draw
+        return this.smooth ? this.__smoothDraw() : this.__hardDraw()        
     }
 
 }

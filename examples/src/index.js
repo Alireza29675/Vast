@@ -4,15 +4,16 @@ const vast = new Vast();
 const circle = new Vast.Circle(10);
 const circle2 = new Vast.Circle(20);
 const rectangle = new Vast.Rectangle(100, 100);
-const path = new Vast.Path();
+const spiral = new Vast.Path();
+spiral.smooth = false;
 
-path.color = '#888';
+spiral.color = '#888';
 circle.color = 'rgba(200, 80, 80, 1)';
 circle2.color = 'rgba(70, 160, 230, 0.8)'
 
 vast.add(circle)
 vast.add(circle2)
-vast.add(path)
+vast.add(spiral)
 
 let time = 0;
 
@@ -23,7 +24,7 @@ const render = () => {
     circle.position.y = Math.sin(time/10) * 40;
     circle2.position.x = Math.sin(time/20) * 100;
     circle2.position.y = Math.cos(time/20) * 20;
-    path.addPoint({ x: Math.sin(time/30) * time, y: Math.cos(time/30) * time})
+    spiral.addPoint({ x: Math.sin(time/30) * time, y: Math.cos(time/30) * time})
 }
 
 // Drawing
