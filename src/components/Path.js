@@ -11,8 +11,6 @@ class Path extends VastObject {
     }
 
     addPoint (point) {
-        // if (!point.x) throw Error ('Point must have { x: Number } property');
-        // if (!point.y) throw Error ('Point must have { x: Number } property');
         this.points.push(point)
     }
 
@@ -21,8 +19,10 @@ class Path extends VastObject {
         const points = this.points;
 
         // path styles
-        this.ctx.strokeStyle = this.color;
-        this.ctx.lineWidth = this.tickness;
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.tickness;
+
+        ctx.beginPath()
 
         if(points == undefined || points.length == 0)
         {
@@ -69,7 +69,6 @@ class Path extends VastObject {
         {
             ctx.lineTo(this.vast.__calcX(points[i].x), this.vast.__calcY(points[i].y))
         }
-
         ctx.stroke();
     }
 
