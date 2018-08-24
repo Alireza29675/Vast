@@ -10,9 +10,7 @@ class Path extends VastObject {
         this.color = '#000';
     }
 
-    addPoint (point) {
-        this.points.push(point)
-    }
+    // private methods
 
     __smoothDraw () {
         const ctx = this.ctx;
@@ -76,6 +74,18 @@ class Path extends VastObject {
 
         // choosing between hard or smooth draw
         return this.smooth ? this.__smoothDraw() : this.__hardDraw()        
+    }
+
+    // public methods
+
+    export () {
+        let encodedPath = 'P:';
+        encodedPath += this.points.map(point => `${point.x},${point.y}`).join('|')
+        return encodedPath;
+    }
+
+    addPoint (point) {
+        this.points.push(point)
     }
 
 }
