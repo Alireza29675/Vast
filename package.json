@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "name": "vast",
+  "name": "vast-canvas",
   "description": "Vast is an infinite space for js canvas",
   "author": "Alireza Sheikholmolouki <alireza.sheikholmolouki@gmail.com>",
   "license": "MIT",
