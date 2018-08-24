@@ -6,7 +6,7 @@ class Path extends VastObject {
         super();
         this.points = points || [];
         this.tickness = tickness;
-        this.smooth = true;
+        this.smooth = false;
         this.color = '#000';
     }
 
@@ -43,8 +43,8 @@ class Path extends VastObject {
         ctx.moveTo(this.vast.__calcX(points[0].x), this.vast.__calcY(points[0].y));
         for (var i = 1; i < points.length - 2; i ++)
         {
-            var xc = (this.vast.__calcX(points[i].x) + this.vast.__calcX(points[i + 1].x)) / 2;
-            var yc = (this.vast.__calcY(points[i].y) + this.vast.__calcY(points[i + 1].y)) / 2;
+            let xc = (this.vast.__calcX(points[i].x) + this.vast.__calcX(points[i + 1].x)) / 2;
+            let yc = (this.vast.__calcY(points[i].y) + this.vast.__calcY(points[i + 1].y)) / 2;
             ctx.quadraticCurveTo(this.vast.__calcX(points[i].x), this.vast.__calcY(points[i].y), xc, yc);
         }
         ctx.quadraticCurveTo(this.vast.__calcX(points[i].x), this.vast.__calcY(points[i].y), this.vast.__calcX(points[i+1].x), this.vast.__calcY(points[i+1].y));

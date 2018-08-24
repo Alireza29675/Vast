@@ -5,7 +5,6 @@ const circle = new Vast.Circle(10);
 const circle2 = new Vast.Circle(20);
 const rectangle = new Vast.Rectangle(100, 100);
 const spiral = new Vast.Path();
-spiral.smooth = false;
 
 spiral.color = '#888';
 circle.color = 'rgba(200, 80, 80, 1)';
@@ -31,6 +30,7 @@ const render = () => {
 let drawingPath = null;
 window.addEventListener('mousedown', e => {
     drawingPath = new Vast.Path([{x: vast.__deCalcX(e.offsetX), y: vast.__deCalcY(e.offsetY)}]);
+    drawingPath.smooth = true;
     vast.add(drawingPath)
 })
 window.addEventListener('mousemove', e => {
