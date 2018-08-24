@@ -10,6 +10,8 @@ class Rectangle extends VastObject {
         this.position = { x, y };
     }
 
+    // private methods
+
     __draw () {
         const ctx = this.ctx;
 
@@ -24,6 +26,18 @@ class Rectangle extends VastObject {
 
         // drawing a rectangle in ctx
         ctx.fillRect(x, y, width, height);
+    }
+
+    // public methods
+
+    export () {
+        let exported = '';
+        exported += `type=Rectangle\n`;
+        exported += `color=${this.color}\n`;
+        exported += `height=${this.height}\n`;
+        exported += `width=${this.width}\n`;
+        exported += `position=${this.position.x}|${this.position.y}`;
+        return exported;
     }
 
 }
