@@ -143,6 +143,19 @@ class Vast {
         this.objects.push(object)
     }
 
+    getSelectedObjects(x, y){
+
+        let selectedObjects = [];
+
+        for(let object of this.objects){
+            if(object.__isInside(x,y)){
+                selectedObjects.push(object)
+            }
+        }
+
+        return selectedObjects;
+    }
+
 }
 
 export default Vast;
