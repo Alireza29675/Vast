@@ -111,7 +111,13 @@ class Vast {
 
         // rendering all vast objects
         for (let object of this.objects) object.__changes();
-        for (let object of this.objects) object.__draw();
+        for (let object of this.objects) {
+            object.__draw();
+            object.__calculateSpiral();
+            if(object.showSpiral){
+                object.__drawSpiral();
+            }
+        }
     }
 
     __calcX (x) {
@@ -135,6 +141,19 @@ class Vast {
     add (object) {
         object.__setVast(this);
         this.objects.push(object)
+    }
+
+    getSelectedObjects(x, y){
+
+        let selectedObjects = [];
+
+        for(let object of this.objects){
+            if(object.__isInside(x,y)){
+                selectedObjects.push(object)
+            }
+        }
+
+        return selectedObjects;
     }
 
 }
