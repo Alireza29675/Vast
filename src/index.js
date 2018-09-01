@@ -111,7 +111,13 @@ class Vast {
 
         // rendering all vast objects
         for (let object of this.objects) object.__changes();
-        for (let object of this.objects) object.__draw();
+        for (let object of this.objects) {
+            object.__draw();
+            object.__calculateSpiral();
+            if(object.showSpiral){
+                object.__drawSpiral();
+            }
+        }
     }
 
     __calcX (x) {
