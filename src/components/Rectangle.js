@@ -28,6 +28,17 @@ class Rectangle extends VastObject {
         ctx.fillRect(x, y, width, height);
     }
 
+    __calculateSpiral(){
+
+        this.spiral = {
+            minX: this.vast.__calcX(this.position.x),
+            minY: this.vast.__calcY(this.position.y),
+            maxX: this.width * this.vast.camera.zoom,
+            maxY: this.height * this.vast.camera.zoom
+        };
+
+    }
+
     // public methods
 
     export () {

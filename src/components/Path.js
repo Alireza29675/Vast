@@ -73,7 +73,27 @@ class Path extends VastObject {
     __draw () {
 
         // choosing between hard or smooth draw
-        return this.smooth ? this.__smoothDraw() : this.__hardDraw()        
+        return this.smooth ? this.__smoothDraw() : this.__hardDraw();
+        
+    }
+
+    __calculateSpiral(){
+
+        let xCoordinates = [];
+        let yCoordinates = [];
+
+        for(let point of this.points){
+            xCoordinates.push(this.vast.__calcX(point.x));
+            yCoordinates.push(this.vast.__calcY(point.y));
+        }
+
+        this.spiral = {
+            minX: Math.min.apply(Math, xCoordinates),
+            maxX: Math.max.apply(Math, xCoordinates),
+            minY: Math.min.apply(Math, yCoordinates),
+            maxY: Math.max.apply(Math, yCoordinates)
+        }
+
     }
 
     // public methods
